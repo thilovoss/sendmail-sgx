@@ -1,0 +1,44 @@
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "/entrypoint/sendmail"
+loader.log_level = "all"
+loader.insecure__use_cmdline_argv = true
+#loader.uid = 1000
+
+loader.env.LD_LIBRARY_PATH = "/lib:{{arch_libdir}}:/usr/lib:/usr/{{arch_libdir}}"
+
+fs.mounts = [
+  {type = "chroot", uri = "file:{{gramine.runtimedir()}}", path = "/lib"},
+  {type = "chroot", uri = "file:/entrypoint/sendmail", path = "/entrypoint/sendmail" },
+  {type = "chroot", uri = "file:{{arch_libdir}}", path = "{{arch_libdir}}" },
+  {type = "chroot", uri = "file:/etc", path = "/etc" },
+  {type = "chroot", uri = "file:/var/spool", path = "/var/spool"},
+  {type = "chroot", uri = "file:/proc/loadavg", path = "/proc/loadavg"},
+  {type = "chroot", uri = "file:/var/run/sendmail/mta/", path = "/var/run/sendmail/mta/"},
+  {type = "chroot", uri = "file:/usr/lib/x86_64-linux-gnu/sasl2/", path = "/usr/lib/x86_64-linux-gnu/sasl2/"},
+  {type = "chroot", uri = "file:/usr/lib/ssl/openssl.cnf", path = "/usr/lib/ssl/openssl.cnf"},
+
+]
+
+sgx.debug = true
+sgx.nonpie_binary = true
+
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:/entrypoint/sendmail",
+  "file:{{ gramine.runtimedir() }}/",
+  "file:/{{arch_libdir}}/",	
+  "file:/usr/{{arch_libdir}}/",
+  "file:/etc/",
+  "file:/var/spool/",
+  "file:/proc/loadavg/",
+  "file:/var/run/sendmail/mta/",
+  "file:/usr/lib/x86_64-linux-gnu/sasl2/",
+  "file:/usr/lib/ssl/openssl.cnf"
+]
+
+sgx.allowed_files = [
+  "file:/usr/local/etc/localtime/",
+  "file:./",
+  "file:/var/lib/",
+  "file:/var/spool/mqueue/",
+]

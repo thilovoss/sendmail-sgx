@@ -1,0 +1,10 @@
+services:
+  sendmail:
+    image: sendmail-sgx
+    container_name: "sendmail-sgx"
+    build:
+      context: .
+    volumes:
+      - /var/run/aesmd/aesm.socket:/var/run/aesmd/aesm.socket
+    devices:
+      - "/dev/sgx_enclave:/dev/sgx_enclave"
