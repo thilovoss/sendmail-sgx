@@ -81,7 +81,7 @@ If you want to support this project, feel free to give it a star and spread the 
 Distributed under the Apache License 2.0 License. See `LICENSE` for more information.
 
 ## Contact
-enclaive.io - [@enclaive_io](https://twitter.com/enclaive_io) - contact@enclaive.io - [https://enclaive.io](https://enclaive.io)
+info[at]thilovoss.de
 
 ## Acknowledgments
 This project greatly celebrates all contributions from the open source community. 
